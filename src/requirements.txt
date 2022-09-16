@@ -1,0 +1,4 @@
+typing_extensions==4.3.0
+-e git+https://github.com/Amsterdam/GOB-Core.git@v1.6.0#egg=gobcore
+-e git+https://github.com/Amsterdam/GOB-Config.git@v0.6.0#egg=gobconfig
+Mako==1.2.2

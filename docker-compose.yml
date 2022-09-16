@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: src
+      target: development
+    container_name: migrate_util
+    volumes:
+      - ./src/migrate_util:/app/migrate_util
+      - ./src/definitions:/definitions
+      - ${GOB_CORE_DIR-../GOB-Core}:/app/GOB-Core
+      - ${GOB_CONFIG_DIR-../GOB-Config}:/app/GOB-Config
+      - ./output:/output

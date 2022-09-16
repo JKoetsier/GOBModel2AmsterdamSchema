@@ -1,0 +1,82 @@
+entities:
+  - catalog: meetbouten
+    collection: meetbouten
+    schema_version: 2.0.0
+    actions:
+      - type: add
+        property:
+          type: string
+          format: date-time
+        column_name: datum_actueel_tot
+      - type: split_json
+        column_name: nabij_nummeraanduiding
+        mapping:
+          bronwaarde: nabij_adres
+        properties:
+          nabij_adres:
+            type: string
+        types:
+          bronwaarde: varchar
+      - type: rename
+        old_column_name: ligt_in_bouwblok
+        new_column_name: ligt_in_gebieden_bouwblok
+      - type: rename
+        old_column_name: ligt_in_buurt
+        new_column_name: ligt_in_gebieden_buurt
+      - type: rename
+        old_column_name: ligt_in_stadsdeel
+        new_column_name: ligt_in_gebieden_stadsdeel
+  - catalog: meetbouten
+    collection: metingen
+    schema_version: 2.0.0
+    actions:
+      - type: rename
+        old_column_name: hoort_bij_meetbout
+        new_column_name: hoort_bij_meetbouten_meetbout
+      - type: rename
+        old_column_name: refereert_aan_referentiepunten
+        new_column_name: refereert_aan_meetbouten_referentiepunten
+      - type: add
+        column_name: datum_actueel_tot
+        property:
+          type: string
+          format: date-time
+  - catalog: meetbouten
+    collection: referentiepunten
+    schema_version: 2.0.0
+    actions:
+      - type: split_json
+        column_name: nabij_nummeraanduiding
+        mapping:
+          bronwaarde: nabij_adres
+        properties:
+          nabij_adres:
+            type: string
+        types:
+          bronwaarde: varchar
+      - type: add
+        column_name: datum_actueel_tot
+        property:
+          type: string
+          format: date-time
+      - type: rename
+        old_column_name: ligt_in_bouwblok
+        new_column_name: ligt_in_gebieden_bouwblok
+      - type: rename
+        old_column_name: ligt_in_buurt
+        new_column_name: ligt_in_gebieden_buurt
+      - type: rename
+        old_column_name: ligt_in_stadsdeel
+        new_column_name: ligt_in_gebieden_stadsdeel
+  - catalog: meetbouten
+    collection: rollagen
+    schema_version: 2.0.0
+    actions:
+      - type: rename
+        old_column_name: is_gemeten_van_bouwblok
+        new_column_name: is_gemeten_van_gebieden_bouwblok
+      - type: add
+        column_name: datum_actueel_tot
+        property:
+          type: string
+          format: date-time
