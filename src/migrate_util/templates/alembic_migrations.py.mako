@@ -1,3 +1,10 @@
+# This file is auto-generated with GOBModel2AmsterdamSchema
+#
+# To use this migration, generated a new empty migration with alembic:
+# alembic revision -m "Your revision message"
+# Open the newly generated revision file, and replace the existing (empty) upgrade() en downgrade() functions with the
+# contents of this file.
+
 from gobupload.alembic_utils import (
     get_query_split_json_column,
     get_query_merge_columns_to_jsonb_column,
@@ -5,6 +12,7 @@ from gobupload.alembic_utils import (
     upgrade_relations,
     downgrade_relations
 )
+from sqlalchemy.dialects import postgresql
 
 renamed_relations = [
     % for relation_rename in relation_renames:
@@ -17,6 +25,7 @@ renamed_relations = [
     ),
     % endfor
 ]
+
 
 def upgrade():
     % for add_column in add_columns:
@@ -41,6 +50,7 @@ def upgrade():
 
     % endfor
     upgrade_relations(op, renamed_relations)
+
 
 def downgrade():
     downgrade_relations(op, renamed_relations)

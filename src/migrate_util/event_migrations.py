@@ -17,7 +17,7 @@ def _add_migration(migrations: dict, from_version: str, catalog: str, collection
 
 
 def generate_event_migrations(entities: list[Entity], gob_model: GOBModel):
-    migrations = GOBMigrations(gob_model)._data
+    migrations = GOBMigrations()._data
 
     for entity in entities:
         current_version = gob_model.get_collection(entity.catalog, entity.collection)['version']

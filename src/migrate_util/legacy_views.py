@@ -1,6 +1,7 @@
 from gobcore.model import GOBModel
 from gobcore.model.relations import get_relation_name
 
+from migrate_util.util import get_new_relation_name
 from migrate_util.write_file import write_yaml
 from migrate_util.definition import Entity
 
@@ -40,10 +41,7 @@ def _create_legacy_views_for_relations(entity: Entity, gob_model: GOBModel) -> l
         old_relation_name = get_relation_name(gob_model, entity.catalog, entity.collection, action.old_column_name)
 
         if old_relation_name:
-            new_relation_name = old_relation_name.replace(action.old_column_name, action.new_column_name)
-
-            # Does not always work. Works very basically for now, do check just in case
-            assert action.new_column_name in new_relation_name, "This trick didn't work here"
+            new_relation_name = get_new_relation_name(gob_model, entity.catalog, entity.collection, action.old_column_name, action.new_column_name)
 
             result.append((
                 gob_model.get_table_name("rel", old_relation_name),
